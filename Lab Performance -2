@@ -10,3 +10,213 @@ Give examples demonstrating the use of this to refer to instance variables and m
 Task-2: 
 a.	Recall the basic principles of exception handling in Java, give example of try-catch blocks and the handling of checked exception. 
 b.  Write a program to demonstrate Interface and implements multiple interface in a java.
+
+Task:1 
+Role and Usage of the super Keyword in Java:
+Accessing Superclass Members:
+
+The super keyword in Java is used to refer to the immediate superclass of a class. It is particularly useful when a subclass overrides a method of its superclass and still wants to access the overridden method of the superclass.
+
+Example:
+
+java
+Copy code
+class Vehicle {
+    void display() {
+        System.out.println("This is a vehicle.");
+    }
+}
+
+class Car extends Vehicle {
+    void display() {
+        super.display(); // Calling superclass method
+        System.out.println("This is a car.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.display();
+    }
+}
+Invoking Superclass Constructors:
+
+When a subclass is instantiated, it implicitly invokes the constructor of its immediate superclass. However, if the superclass constructor requires arguments, those arguments must be passed using the super() call.
+
+Example:
+
+java
+Copy code
+class Vehicle {
+    Vehicle(int wheels) {
+        System.out.println("Vehicle with " + wheels + " wheels.");
+    }
+}
+
+class Car extends Vehicle {
+    Car() {
+        super(4); // Calling superclass constructor
+        System.out.println("Car created.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car car = new Car();
+    }
+}
+Significance of the this Keyword in Java:
+Referring to Instance Variables and Methods:
+
+The this keyword in Java is used to refer to the current instance of the class. It is primarily used to differentiate between instance variables and method parameters with the same name.
+
+Example:
+
+java
+Copy code
+class Car {
+    String color;
+
+    Car(String color) {
+        this.color = color; // Referring to instance variable
+    }
+
+    void displayColor() {
+        System.out.println("Car color: " + this.color); // Referring to instance variable
+    }
+}
+Scenarios for Disambiguation:
+
+When there is ambiguity between instance variables and method parameters, using this helps clarify which one is being referred to.
+
+Example:
+
+java
+Copy code
+class Car {
+    String color;
+
+    Car(String color) {
+        this.color = color; // Referring to instance variable
+    }
+
+    void setColor(String color) {
+        this.color = color; // Referring to instance variable
+    }
+}
+Referring to Another Constructor:
+
+The this() constructor call is used to invoke another constructor of the same class from within a constructor. It is useful for constructor chaining.
+
+Example:
+
+java
+Copy code
+class Car {
+    String color;
+
+    Car() {
+        this("Red"); // Invoking another constructor
+    }
+
+    Car(String color) {
+        this.color = color;
+    }
+}
+In summary, super is used to access superclass members and constructors, while this is used to refer to instance variables, methods, and constructors within the same class. Both keywords play crucial roles in maintaining clarity and managing inheritance in Java code.
+Task:2
+a. Exception Handling in Java:
+Exception handling in Java allows developers to manage runtime errors gracefully. Here's a brief overview:
+
+Try-Catch Blocks:
+
+Code that might throw an exception is placed within a try block. If an exception occurs within the try block, control is transferred to the catch block.
+
+catch blocks handle exceptions, specifying the type of exception they can handle.
+
+Example:
+
+java
+Copy code
+try {
+    // Code that might throw an exception
+    int result = 10 / 0; // ArithmeticException: division by zero
+} catch (ArithmeticException e) {
+    // Handling the exception
+    System.out.println("An arithmetic exception occurred: " + e.getMessage());
+}
+Checked Exceptions:
+
+Checked exceptions are those that must be declared in the method signature using throws keyword or handled using try-catch blocks.
+
+Example:
+
+java
+Copy code
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            // Code that might throw a checked exception
+            File file = new File("example.txt");
+            Scanner scanner = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            // Handling the exception
+            System.out.println("File not found: " + e.getMessage());
+        }
+    }
+}
+b. Program Demonstrating Interface and Implementing Multiple Interfaces:
+In Java, an interface is a reference type, similar to a class, that can contain only constants, method signatures, default methods, static methods, and nested types. A class implements an interface by providing implementations for its abstract methods. Here's a program demonstrating multiple interface implementation:
+
+java
+Copy code
+// Interface 1
+interface Vehicle {
+    void start();
+    void stop();
+}
+
+// Interface 2
+interface ElectricVehicle {
+    void charge();
+}
+
+// Class implementing both interfaces
+class Car implements Vehicle, ElectricVehicle {
+    @Override
+    public void start() {
+        System.out.println("Car started.");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Car stopped.");
+    }
+
+    @Override
+    public void charge() {
+        System.out.println("Car charging.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car car = new Car();
+        car.start();
+        car.stop();
+        car.charge();
+    }
+}
+In this program:
+
+We define two interfaces: Vehicle and ElectricVehicle, each containing method signatures.
+The Car class implements both interfaces and provides implementations for all the methods defined in the interfaces.
+In the main method, we create an instance of the Car class and demonstrate calling methods defined in both interfaces.
+
+
+
